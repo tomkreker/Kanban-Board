@@ -24,7 +24,12 @@
             <h2> To do </h2>
             <ul>
                 {% for task in todo %}
-                <li>{{task.text}} <a href='{{url_for('move',id=task.id,category='Doing')}}'> Started Doing </a> </li>
+                <li>{{task.text}} 
+				<a href='{{url_for('move',id=task.id,category='Doing')}}'> Started Doing </a> 
+				<form style="display: inline-block;" action='{{url_for('delete', id=task.id)}}' method='POST'> 
+					<input type="submit" value='Delete Task' onclick="return confirm('Are you sure?');"> 
+				</form>
+				</li>
                 {% endfor %}
             </ul>
         </div>
@@ -32,8 +37,14 @@
             <h2> Doing </h2>
             <ul>
                 {% for task in doing %}
-                <li>{{task.text}} <a href='{{url_for('move',id=task.id,category='To Do')}}'>Back to start</a> | <a href='{{url_for('move',id=task.id,category='Done')}}'> I'm Done </a> </li>
-                {% endfor %}
+                <li>{{task.text}} 
+				<a href='{{url_for('move',id=task.id,category='To Do')}}'>Back to start</a> | 
+				<a href='{{url_for('move',id=task.id,category='Done')}}'> I'm Done</a> 
+                <form style="display: inline-block;" action='{{ url_for('delete', id=task.id) }}' method='POST'> 
+					<input type="submit" value='Delete Task' onclick="return confirm('Are you sure?');"> 
+				</form>
+				</li>
+				{% endfor %}
             </ul>
         </div>
         
@@ -41,8 +52,12 @@
             <h2> Done </h2>
             <ul>
                 {% for task in done %}
-                <li>{{task.text}} <a href='{{url_for('move',id=task.id,category='Doing')}}'> Still Doing</a> </li>
-                {% endfor %}
+                <li>{{task.text}} <a href='{{url_for('move',id=task.id,category='Doing')}}'> Still Doing</a> 
+                <form style="display: inline-block;" action='{{ url_for('delete', id=task.id) }}' method='POST'> 
+					<input type="submit" value='Delete Task' onclick="return confirm('Are you sure?');"> 
+				</form>
+				</li>
+				{% endfor %}
             </ul>
         </div>
     </body>

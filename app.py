@@ -39,6 +39,14 @@ def move(id,category):
 	task.category = category
 	db.session.commit()
 	return redirect(url_for('index'))
+	
+@app.route('/delete/<id>', methods=['POST'])
+def delete(id):
+	task = Task.query.get(id)
+	db.session.delete(task)
+	db.session.commit()
+
+	return redirect(url_for('index'))
 
 if __name__ == '__main__':
 	app.run(debug=True)
