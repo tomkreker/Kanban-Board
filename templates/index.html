@@ -24,7 +24,7 @@
             <h2> To do </h2>
             <ul>
                 {% for task in todo %}
-                <li>{{task.text}} <!--<a href='{{url_for('index',id=task.id)}}'> complete </a> </li>-->
+                <li>{{task.text}} <a href='{{url_for('move',id=task.id,category='Doing')}}'> Started Doing </a> </li>
                 {% endfor %}
             </ul>
         </div>
@@ -32,7 +32,7 @@
             <h2> Doing </h2>
             <ul>
                 {% for task in doing %}
-                <li>{{task.text}} <!--<a href='{{url_for('index',id=task.id)}}'> complete </a> </li>-->
+                <li>{{task.text}} <a href='{{url_for('move',id=task.id,category='To Do')}}'>Back to start</a> | <a href='{{url_for('move',id=task.id,category='Done')}}'> I'm Done </a> </li>
                 {% endfor %}
             </ul>
         </div>
@@ -41,7 +41,7 @@
             <h2> Done </h2>
             <ul>
                 {% for task in done %}
-                <li>{{task.text}} <!--<a href='{{url_for('index',id=task.id)}}'> complete </a> </li>-->
+                <li>{{task.text}} <a href='{{url_for('move',id=task.id,category='Doing')}}'> Still Doing</a> </li>
                 {% endfor %}
             </ul>
         </div>

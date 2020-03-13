@@ -26,8 +26,6 @@ def index():
 	done = Task.query.filter_by(category='Done').all()
 	return render_template('index.html',todo=todo, doing=doing,done=done)
 
-	#return render_template('index.html', incomplete=incomplete, complete=complete)
-
 @app.route('/add', methods=['POST'])
 def add():
 	newtask = Task(text=request.form['newtask'], category=request.form['category'])
@@ -35,12 +33,12 @@ def add():
 	db.session.commit()
 	return redirect(url_for('index'))
 	
-#@app.route('/complete/<id>')
-#def complete(id):
-	#todo = Todo.query.filter_by(id=int(id)).first()
-	#todo.complete = True
-	#db.session.commit()
-	#return redirect(url_for('index'))
+@app.route('/move/<id>/<category>')
+def move(id,category):
+	task = Task.query.get(id)
+	task.category = category
+	db.session.commit()
+	return redirect(url_for('index'))
 
 if __name__ == '__main__':
 	app.run(debug=True)
