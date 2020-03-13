@@ -20,7 +20,7 @@ def index():
 
 @app.route('/add', methods=['POST'])
 def add():
-	newtask = Task(text=request.form['newtask'], category=request.form['category'])
+	newtask = Task(text=request.form['text'], category=request.form['category'])
 	db.session.add(newtask)
 	db.session.commit()
 	return redirect(url_for('index'))
