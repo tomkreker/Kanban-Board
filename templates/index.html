@@ -23,27 +23,26 @@
         <div class='column'>
             <h2> To do </h2>
             <ul>
-                <!--
-                {% for todo in incomplete %}
-                <li>{{todo.text}} <a href='{{url_for('complete',id=todo.id)}}'> complete </a> </li>
+                {% for task in todo %}
+                <li>{{task.text}} <!--<a href='{{url_for('index',id=task.id)}}'> complete </a> </li>-->
                 {% endfor %}
-                -->
             </ul>
         </div>
         <div class='column'>
             <h2> Doing </h2>
             <ul>
-                <li> Task 3 </li>
-                <li> Task 4 </li>
+                {% for task in doing %}
+                <li>{{task.text}} <!--<a href='{{url_for('index',id=task.id)}}'> complete </a> </li>-->
+                {% endfor %}
             </ul>
         </div>
         
         <div class='column'>
             <h2> Done </h2>
-            <ul><!--
-                {% for todo in complete %}
-                <li>{{todo.text}}</li>
-                {% endfor %} -->
+            <ul>
+                {% for task in done %}
+                <li>{{task.text}} <!--<a href='{{url_for('index',id=task.id)}}'> complete </a> </li>-->
+                {% endfor %}
             </ul>
         </div>
     </body>

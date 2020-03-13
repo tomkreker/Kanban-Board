@@ -21,9 +21,10 @@ db.create_all()
 	
 @app.route('/')
 def index():
-	#incomplete = Todo.query.filter_by(complete=False).all()
-	#complete = Todo.query.filter_by(complete=True).all()
-	return render_template('index.html')
+	todo = Task.query.filter_by(category='To Do').all()
+	doing = Task.query.filter_by(category='Doing').all()
+	done = Task.query.filter_by(category='Done').all()
+	return render_template('index.html',todo=todo, doing=doing,done=done)
 
 	#return render_template('index.html', incomplete=incomplete, complete=complete)
 
