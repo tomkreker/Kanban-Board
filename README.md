@@ -6,6 +6,7 @@ A simple Kanban board application for task management.
 - Add new tasks
 - Switch tasks between three categories: To Do, Doing and Done
 - Delete tasks (prompting the user for confirmation)
+- A lovely dog image to keep you smiling
 
 ## Installation
 
