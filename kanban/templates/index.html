@@ -1,64 +1,72 @@
 <!DOCTYPE html>
 <html lang='en-US'>
-    <head>
-        <meta charset='utf-8'>
-        <title>My Kanban Board</title>
-        <link rel='stylesheet' href='style.css'>
-    </head>
-    <body>
-        <h1 class='center'> Kanban </h1>
-        <form action='/add' method='POST'>
-            <label for='text'>Task:</label>
-            <input type='text' id='text' name='text'>
-            <select class="form-control" id="category" name="category">
-                  <option>To Do</option>
-                  <option>Doing</option>
-                  <option>Done</option>
-            </select>
-            <p class='button'>
-                <button type='submit'>Add task</button>
-            </p>
-        </form>
-        
-        <div class='column'>
-            <h2> To do </h2>
-            <ul>
-                {% for task in todo %}
-                <li>{{task.text}} 
-				<a href='{{url_for('move',id=task.id,category='Doing')}}'> Started Doing </a> 
-				<form style="display: inline-block;" action='{{url_for('delete', id=task.id)}}' method='POST'> 
-					<input type="submit" value='Delete Task' onclick="return confirm('Are you sure?');"> 
-				</form>
-				</li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class='column'>
-            <h2> Doing </h2>
-            <ul>
-                {% for task in doing %}
-                <li>{{task.text}} 
-				<a href='{{url_for('move',id=task.id,category='To Do')}}'>Back to start</a> | 
-				<a href='{{url_for('move',id=task.id,category='Done')}}'> I'm Done</a> 
-                <form style="display: inline-block;" action='{{ url_for('delete', id=task.id) }}' method='POST'> 
-					<input type="submit" value='Delete Task' onclick="return confirm('Are you sure?');"> 
-				</form>
+	<head>
+		<meta charset='utf-8'>
+		<title>My Kanban Board</title>
+		<link rel='stylesheet' href="{{url_for('static', filename='style.css')}}">
+	</head>
+	<body>
+		<div class='center'>
+			<h1> Kanban </h1>
+			<form action='/add' method='POST'>
+				<label for='text'>New Task:</label>
+				<input type='text' id='text' name='text'>
+				<select id="category" name="category">
+					  <option>To Do</option>
+					  <option>Doing</option>
+					  <option>Done</option>
+				</select>
+				<p>
+					<button type='submit'>Add task</button>
+				</p>
+			</form>
+		</div>
+		
+		<div class='column'>
+			<h2> To do </h2>
+			<ul>
+				{% for task in todo %}
+				<li>
+				{{task.text}} 
+				<a href='{{url_for('move',id=task.id,category='Doing')}}'>&#8594;</a> 
+					<form style="display: inline-block;" action='{{url_for('delete', id=task.id)}}' method='POST'> 
+						<input type="submit" value='Delete' onclick="return confirm('Are you sure?');"> 
+					</form>
 				</li>
 				{% endfor %}
-            </ul>
-        </div>
-        
-        <div class='column'>
-            <h2> Done </h2>
-            <ul>
-                {% for task in done %}
-                <li>{{task.text}} <a href='{{url_for('move',id=task.id,category='Doing')}}'> Still Doing</a> 
-                <form style="display: inline-block;" action='{{ url_for('delete', id=task.id) }}' method='POST'> 
-					<input type="submit" value='Delete Task' onclick="return confirm('Are you sure?');"> 
-				</form>
+			</ul>
+		</div>
+		<div class='column'>
+			<h2> Doing </h2>
+			<ul>
+				{% for task in doing %}
+				<li> 
+					<a href='{{url_for('move',id=task.id,category='To Do')}}'>&#8592;</a>
+					{{task.text}}
+					<a href='{{url_for('move',id=task.id,category='Done')}}'>&#8594;</a> 
+					<form style="display: inline-block;" action='{{ url_for('delete', id=task.id) }}' method='POST'> 
+						<input type="submit" value='Delete' onclick="return confirm('Are you sure?');"> 
+					</form>
 				</li>
 				{% endfor %}
-            </ul>
-        </div>
-    </body>
+			</ul>
+		</div>
+		<div class='column'>
+			<h2> Done </h2>
+			<ul>
+				{% for task in done %}
+				<li>
+					<a href='{{url_for('move',id=task.id,category='Doing')}}'>&#8592;</a>
+					{{task.text}}
+					<form style="display: inline-block;" action='{{ url_for('delete', id=task.id) }}' method='POST'> 
+						<input type="submit" value='Delete' onclick="return confirm('Are you sure?');"> 
+					</form>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<span class="center" style="font-size:12px;position:fixed;bottom:10px;left:0;right:0;">If your tasks are about to reach the dog, you should probably start getting them done.</span>
+		<img src="{{url_for('static', filename='dog.jpg')}}" alt='dog' height='226' width='403' class='center' style="position:fixed;bottom:30px;left:0;right:0;">
+
+	</body>
 </html>
