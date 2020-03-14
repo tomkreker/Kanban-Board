@@ -11,7 +11,7 @@
 }
 
 h2{
-	text-align: center
+  text-align: center
 }
 
 ul {
@@ -19,7 +19,7 @@ ul {
   text-align: center;
 }
 
-input[type=submit] {
+input[type=submit] { /* for the delete buttons*/
   background-color: lightgrey;
   border: none;
   font-size: 10px;
